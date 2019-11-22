@@ -3,6 +3,7 @@ import { takeLatest, call, put ,all } from 'redux-saga/effects';
 import { signInSuccess } from './actions';
 
 import api from '~/services/api';
+import history from '~/services/history';
 
 export function* signIn({ payload }){
   const { email, password } = payload;
@@ -19,7 +20,9 @@ export function* signIn({ payload }){
     return;
   }
 
-  yield put(signInSuccess(token, user))
+  yield put(signInSuccess(token, user));
+
+  history.push('/dashboard');
 
 }
 
